@@ -147,7 +147,7 @@ img{max-width:100%}
 
 /* ── WHY ── */
 .why{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);position:relative;overflow:hidden}
-.why::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 800px 600px at 80% 50%,rgba(212,175,55,.07),transparent)}
+.why::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 800px 600px at 80% 50%,rgba(212,175,55,.07),transparent);pointer-events:none}
 .why-layout{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center}
 .why-left h2{color:var(--white);margin-bottom:24px;font-family:'Playfair Display',serif}
 .why-left p{color:rgba(255,255,255,.55);margin-bottom:36px}
@@ -210,8 +210,8 @@ img{max-width:100%}
 
 /* ── CONTACT ── */
 .contact{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);position:relative;overflow:hidden}
-.contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 500px at 20% 80%,rgba(212,175,55,.06),transparent)}
-.contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:96px;align-items:start}
+.contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 500px at 20% 80%,rgba(212,175,55,.06),transparent);pointer-events:none}
+.contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:96px;align-items:start;position:relative;z-index:2}
 .contact-left h2{color:var(--white);margin-bottom:20px}
 .contact-left>p{color:rgba(255,255,255,.55);margin-bottom:48px;font-size:1.05rem}
 .cinfo{display:flex;flex-direction:column;gap:20px}
@@ -220,7 +220,7 @@ img{max-width:100%}
 .cinfo-label{font-size:.72rem;color:rgba(255,255,255,.35);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
 .cinfo-val{font-size:.9rem;color:rgba(255,255,255,.8);font-weight:500}
 
-.contact-form{background:#ffffff;border-radius:20px;padding:52px 48px;box-shadow:0 24px 64px rgba(0,43,91,.25)}
+.contact-form{background:#ffffff;border-radius:20px;padding:52px 48px;box-shadow:0 24px 64px rgba(0,43,91,.25);position:relative;z-index:2}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .fg{margin-bottom:20px}
 .fg label{display:block;font-size:.76rem;font-weight:700;color:var(--text);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
@@ -379,9 +379,9 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
       <div class="about-body reveal from-right">
         <div class="tag">Our Story</div>
         <h2>Born From a Real<br/>Migration Journey</h2>
-        <p style="margin-top:20px">Avionyx Consulting didn't start in a boardroom — it started at an airport, a stack of unfamiliar documents, and the quiet anxiety of not knowing what comes next.</p>
-        <p>We've lived through the confusion of immigration forms, the uncertainty of application processes, and the deep importance of getting it right. That personal experience is now our greatest professional asset.</p>
-        <p>Today, we exist to give you what we wished we had: a trusted guide who speaks plainly, reviews carefully, and walks with you toward your destination.</p>
+        <p style="margin-top:20px">Avionyx Consulting was built from real experience, not theory. It began with the challenges of navigating immigration processes, handling complex documentation, and understanding how important every step can be.</p>
+        <p>Having gone through the journey ourselves, we know how easy it is to feel unsure about what to do next. That is why our approach is practical, careful, and detail-focused.</p>
+        <p>Today, we help individuals and families move forward with confidence by providing clear advice, thorough document review, and guidance based on real experience.</p>
         <div class="about-tags">
           <span class="a-tag">🧭 Immigration Advisory</span>
           <span class="a-tag">📋 Document Review</span>
@@ -633,7 +633,7 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
             <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+234 816 854 3901"/></div>
             <div class="fg">
               <label>Service Needed</label>
-              <select>
+              <select name="service">
                 <option value="">Select a service...</option>
                 <option>Immigration Consultation</option>
                 <option>Document Review</option>
@@ -732,8 +732,10 @@ mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mob.classLis
 // Reveal on scroll
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.1});
+},{threshold:0.05});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// Fallback: ensure all reveals visible after 1.5s
+setTimeout(()=>{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'))},1500);
 
 // FAQ
 document.querySelectorAll('.faq-btn').forEach(btn=>{
