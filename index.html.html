@@ -290,6 +290,24 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
 .nav-logo-img{height:44px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
 .logo-img-link{display:flex;align-items:center}
 .footer-logo-img{height:52px;width:auto;object-fit:contain;margin-bottom:16px;filter:brightness(1.1)}
+
+/* ── BOOKING MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.active{opacity:1;pointer-events:all}
+.modal-box{background:#fff;border-radius:20px;padding:48px 44px;max-width:480px;width:90%;position:relative;transform:translateY(20px);transition:transform .3s;box-shadow:0 32px 80px rgba(0,43,91,.25)}
+.modal-overlay.active .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:16px;right:20px;font-size:1.4rem;background:none;border:none;cursor:pointer;color:var(--muted);line-height:1}
+.modal-close:hover{color:var(--navy)}
+.modal-box h3{font-size:1.5rem;color:var(--navy);margin-bottom:8px}
+.modal-box p{font-size:.9rem;color:var(--muted);margin-bottom:28px}
+.booking-options{display:flex;flex-direction:column;gap:12px}
+.booking-opt{display:flex;align-items:center;gap:14px;padding:16px 20px;border:1.5px solid var(--gray);border-radius:var(--radius);text-decoration:none;color:var(--navy);font-weight:600;font-size:.9rem;transition:all .25s}
+.booking-opt:hover{border-color:var(--gold2);background:rgba(201,162,39,.05);transform:translateX(4px)}
+.booking-opt-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.booking-opt-txt small{display:block;font-size:.72rem;color:var(--muted);font-weight:400;margin-top:2px}
+.booking-divider{text-align:center;font-size:.75rem;color:var(--muted);margin:4px 0;position:relative}
+.booking-divider::before,.booking-divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--gray)}
+.booking-divider::before{left:0}.booking-divider::after{right:0}
 </style>
 </head>
 <body>
@@ -303,8 +321,9 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#process">Process</a></li>
+        <li><a href="#countries">Countries</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+        <li><a href="#" data-booking class="nav-cta">Book a Call</a></li>
       </ul>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -313,8 +332,9 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
       <a href="#services">Services</a>
       <a href="#process">Process</a>
       <a href="#testimonials">Testimonials</a>
+      <a href="#countries">Countries</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact">Book a Call</a>
+      <a href="#" data-booking>Book a Call</a>
     </div>
   </div>
 </nav>
@@ -335,7 +355,7 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
       <h1>Navigate Your<br/>Migration Journey<br/>with <em>Clarity</em></h1>
       <p class="hero-desc">Avionyx Consulting was born from a real migration story. We understand the confusion, the paperwork, and what's truly at stake — and we're here to guide you every step of the way.</p>
       <div class="hero-btns">
-        <a href="#contact" class="btn btn-gold">Book a Consultation <span class="arr">→</span></a>
+        <a href="#" data-booking class="btn btn-gold">Book a Consultation <span class="arr">→</span></a>
         <a href="#services" class="btn btn-outline">Explore Services</a>
       </div>
       <div class="hero-metrics">
@@ -387,6 +407,8 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
           <span class="a-tag">📋 Document Review</span>
           <span class="a-tag">🏡 Settlement Support</span>
           <span class="a-tag">⚖️ ADR Support</span>
+          <span class="a-tag">🇨🇦 Canada</span>
+          <span class="a-tag">🇦🇺 Australia</span>
         </div>
         <a href="#contact" class="btn btn-dark">Start Your Journey <span>→</span></a>
       </div>
@@ -436,7 +458,7 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
         <div class="svc-icon-wrap">💬</div>
         <h3>Not Sure Where to Start?</h3>
         <p style="color:rgba(255,255,255,.5)">Book a free 15-minute discovery call. We'll listen and point you in the right direction — no strings attached.</p>
-        <a href="#contact" class="btn btn-gold" style="margin-top:24px;font-size:.82rem;padding:12px 24px">Free Discovery Call →</a>
+        <a href="#" data-booking class="btn btn-gold" style="margin-top:24px;font-size:.82rem;padding:12px 24px">📅 Book a Free Call →</a>
       </div>
     </div>
   </div>
@@ -658,6 +680,44 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
   </div>
 </section>
 
+<!-- COUNTRIES -->
+<section class="countries section" id="countries" style="background:#ffffff;padding:80px 0">
+  <div class="container">
+    <div class="section-center reveal" style="text-align:center;margin-bottom:48px">
+      <div class="tag">Where We Help</div>
+      <h2 style="color:var(--navy)">Countries We Cover</h2>
+      <p style="max-width:560px;margin:16px auto 0">We provide immigration advisory and consulting services for individuals and families seeking to relocate to Canada and Australia — two of the world's most welcoming destinations.</p>
+    </div>
+    <div class="countries-grid reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:800px;margin:0 auto">
+      <div style="background:var(--offwhite);border:1.5px solid var(--gray);border-radius:var(--radius);padding:48px 40px;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='var(--gold2)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 48px rgba(0,43,91,.1)'" onmouseout="this.style.borderColor='var(--gray)';this.style.transform='none';this.style.boxShadow='none'">
+        <div style="font-size:4rem;margin-bottom:20px">🇨🇦</div>
+        <h3 style="font-size:1.4rem;color:var(--navy);margin-bottom:12px">Canada</h3>
+        <p style="font-size:.875rem;line-height:1.75;margin-bottom:20px">Study permits, work permits, Express Entry, spousal sponsorships, provincial nominee programs, and permanent residency pathways.</p>
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:.82rem;font-weight:700;text-decoration:none;transition:gap .2s">Get Canada Advice →</a>
+      </div>
+      <div style="background:var(--offwhite);border:1.5px solid var(--gray);border-radius:var(--radius);padding:48px 40px;text-align:center;transition:all .3s" onmouseover="this.style.borderColor='var(--gold2)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 48px rgba(0,43,91,.1)'" onmouseout="this.style.borderColor='var(--gray)';this.style.transform='none';this.style.boxShadow='none'">
+        <div style="font-size:4rem;margin-bottom:20px">🇦🇺</div>
+        <h3 style="font-size:1.4rem;color:var(--navy);margin-bottom:12px">Australia</h3>
+        <p style="font-size:.875rem;line-height:1.75;margin-bottom:20px">Skilled migration, student visas, partner visas, employer sponsored visas, and general skilled migration streams.</p>
+        <a href="#contact" style="display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:.82rem;font-weight:700;text-decoration:none;transition:gap .2s">Get Australia Advice →</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <p style="font-size:.875rem;color:var(--muted)">Not sure which pathway is right for you? <a href="#contact" style="color:var(--gold2);font-weight:700;text-decoration:none">Book a free discovery call →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING BANNER -->
+<section style="background:linear-gradient(135deg,var(--gold2),#b38d1e);padding:60px 0">
+  <div class="container" style="text-align:center">
+    <h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:12px">Ready to Talk? Book a Free 15-Min Call</h2>
+    <p style="color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto">No commitment, no pressure. Just a quick conversation about your situation and how we can help.</p>
+    <a href="#" data-booking class="btn" style="background:#fff;color:var(--navy);font-weight:700;font-size:1rem;padding:16px 40px;border-radius:100px;box-shadow:0 4px 20px rgba(0,0,0,.15)">📅 Schedule Your Free Call →</a>
+    <p style="color:rgba(255,255,255,.6);font-size:.78rem;margin-top:16px">Available via Google Meet · Microsoft Teams · Phone</p>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
@@ -677,6 +737,7 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
       <div class="footer-col">
         <h5>Company</h5>
         <a href="#about">About Us</a>
+        <a href="#countries">Countries</a>
         <a href="#process">How It Works</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#faq">FAQ</a>
@@ -701,6 +762,36 @@ footer{background:var(--navy);padding:80px 0 36px;border-top:3px solid var(--gol
 </footer>
 
 <script>
+// ============================================================
+// 🔗 PASTE YOUR MEETING LINKS BELOW
+// ============================================================
+const GOOGLE_MEET_LINK = 'https://calendar.app.google/cBUNn6HPdLpifM7p6';  // ← Google booking link
+const TEAMS_LINK       = 'https://teams.microsoft.com/your-link'; // ← paste your Teams link
+// (WhatsApp is already set to your number +2348168543901)
+// ============================================================
+
+// Set links into modal
+document.getElementById('meetLink').href = GOOGLE_MEET_LINK;
+document.getElementById('teamsLink').href = TEAMS_LINK;
+
+// Open/close modal
+function openBookingModal(){ document.getElementById('bookingModal').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeBookingModal(){ document.getElementById('bookingModal').classList.remove('active'); document.body.style.overflow=''; }
+
+// Close on overlay click
+document.getElementById('bookingModal').addEventListener('click', function(e){ if(e.target===this) closeBookingModal(); });
+
+// Wire all booking buttons to open modal
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('[data-booking]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      openBookingModal();
+    });
+  });
+});
+// ============================================================
+
 // Nav scroll
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>60));
@@ -789,5 +880,35 @@ async function submitForm(e){
   document.getElementById('successMsg').classList.add('show');
 }
 </script>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBookingModal()">✕</button>
+    <h3>Book a Free Call</h3>
+    <p>Choose how you'd like to connect. All calls are free, 15 minutes, no commitment.</p>
+    <div class="booking-options">
+      <a href="GOOGLE_MEET_LINK" target="_blank" class="booking-opt" id="meetLink">
+        <div class="booking-opt-icon" style="background:#e8f5e9">📹</div>
+        <div class="booking-opt-txt">Google Meet<small>Click to open booking page</small></div>
+        <span style="margin-left:auto;color:var(--muted)">→</span>
+      </a>
+      <div class="booking-divider">or</div>
+      <a href="TEAMS_LINK" target="_blank" class="booking-opt" id="teamsLink">
+        <div class="booking-opt-icon" style="background:#e3f2fd">💼</div>
+        <div class="booking-opt-txt">Microsoft Teams<small>Click to open booking page</small></div>
+        <span style="margin-left:auto;color:var(--muted)">→</span>
+      </a>
+      <div class="booking-divider">or</div>
+      <a href="https://wa.me/2348168543901?text=Hi%20Avionyx%2C%20I%27d%20like%20to%20book%20a%20free%20discovery%20call." target="_blank" class="booking-opt">
+        <div class="booking-opt-icon" style="background:#e8f5e9">💬</div>
+        <div class="booking-opt-txt">WhatsApp<small>Message us to schedule</small></div>
+        <span style="margin-left:auto;color:var(--muted)">→</span>
+      </a>
+    </div>
+    <p style="font-size:.72rem;text-align:center;margin-top:20px;margin-bottom:0">📞 Or call us directly: <strong>+234 816 854 3901</strong></p>
+  </div>
+</div>
+
 </body>
 </html>
